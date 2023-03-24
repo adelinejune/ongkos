@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ongkos/app/modules/setting/controller.dart';
 
-class Setting extends StatelessWidget {
-  const Setting({super.key});
+class SettingPage extends GetView<SettingController> {
+  const SettingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
