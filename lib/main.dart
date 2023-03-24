@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ongkos/app/modules/home/view.dart';
+import 'package:get/get.dart';
+import 'package:ongkos/app/routes/app_pages.dart';
+import 'package:ongkos/app/routes/app_routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,9 +13,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      initialRoute: AppRoutes.NAVIGATION,
+      getPages: AppPages.list,
+      debugShowCheckedModeBanner: false,
       title: 'Ongkos Kirim',
-      home: HomePage(),
     );
   }
 }
