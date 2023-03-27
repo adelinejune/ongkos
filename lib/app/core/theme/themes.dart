@@ -5,6 +5,7 @@ class Themes {
   final lightTheme = ThemeData.light().copyWith(
     scaffoldBackgroundColor: Colors.white,
     primaryColor: primaryBlue,
+    primaryColorDark: backgroundNav,
     canvasColor: backgroundNav,
     textTheme: const TextTheme(
       titleMedium: TextStyle(
@@ -16,5 +17,6 @@ class Themes {
     scaffoldBackgroundColor: grey,
     canvasColor: backgroundNav,
     primaryColor: purpleAccent,
+    primaryColorDark: darkGrey,
   );
 }
