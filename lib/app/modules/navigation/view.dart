@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ongkos/app/core/utils/extension.dart';
 import 'package:ongkos/app/modules/home/view.dart';
 import 'package:ongkos/app/modules/resi/view.dart';
 import 'package:ongkos/app/modules/setting/view.dart';
@@ -21,22 +21,33 @@ class NavigationPage extends StatelessWidget {
           children: [HomePage(), CekResiPage(), SettingPage()],
         )),
         bottomNavigationBar: BottomNavigationBar(
-            unselectedItemColor: Colors.black,
-            selectedItemColor: Colors.redAccent,
+            unselectedItemColor: Colors.white,
+            unselectedFontSize: 9.0.sp,
+            selectedFontSize: 9.0.sp,
+            selectedItemColor: Theme.of(context).primaryColor,
             currentIndex: controller.tabIndex,
             onTap: controller.changeTabIndex,
             type: BottomNavigationBarType.fixed,
-            items: const [
+            items: [
               BottomNavigationBarItem(
-                icon: FaIcon(FontAwesomeIcons.boxOpen),
+                icon: Padding(
+                  padding: EdgeInsets.only(bottom: 2.0.wp, top: 1.5.hp),
+                  child: FaIcon(FontAwesomeIcons.boxOpen),
+                ),
                 label: 'Cek Ongkir',
               ),
               BottomNavigationBarItem(
-                icon: FaIcon(FontAwesomeIcons.truck),
+                icon: Padding(
+                  padding: EdgeInsets.only(bottom: 2.0.wp, top: 1.5.hp),
+                  child: FaIcon(FontAwesomeIcons.truck),
+                ),
                 label: 'Cek Resi',
               ),
               BottomNavigationBarItem(
-                icon: FaIcon(FontAwesomeIcons.gear),
+                icon: Padding(
+                  padding: EdgeInsets.only(bottom: 2.0.wp, top: 1.5.hp),
+                  child: FaIcon(FontAwesomeIcons.gear),
+                ),
                 label: 'Setting',
               ),
             ]),
