@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:ongkos/app/core/theme/theme_service.dart';
+import 'package:ongkos/app/core/theme/themes.dart';
 import 'package:ongkos/app/routes/app_pages.dart';
 import 'package:ongkos/app/routes/app_routes.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -18,6 +22,9 @@ class MyApp extends StatelessWidget {
       getPages: AppPages.list,
       debugShowCheckedModeBanner: false,
       title: 'Ongkos Kirim',
+      theme: Themes().lightTheme,
+      darkTheme: Themes().darkTheme,
+      themeMode: ThemeService().getThemeMode(),
     );
   }
 }
