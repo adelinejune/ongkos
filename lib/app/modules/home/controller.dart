@@ -10,19 +10,25 @@ class HomeController extends GetxController {
   final String title = 'Home Title';
   RxList cities = [].obs;
 
+  var kotaAsalId = 0.obs;
+  var kotaTujuanId = 0.obs;
+  var kotaAsal = "".obs;
+  var kotaTujuan = "".obs;
+
+  var kurir = "".obs;
+
+  double berat = 0.0;
+
   @override
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
     try {
-      await cityRepository.fetchCities();
-      var citiesList = cityRepository.cities();
-      cities = RxList.from(citiesList.map((item) => item.toJson()));
+      final fetchedCities = await cityRepository.fetchCities();
+      cities.assignAll(fetchedCities.map((city) => city.toJson()));
       print(cities);
     } catch (error) {
       print("Error fetching cities: $error");
     }
-
-    print("done");
   }
 }
