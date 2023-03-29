@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:ongkos/app/core/utils/extension.dart';
 import 'package:ongkos/app/modules/home/controller.dart';
+import 'package:ongkos/app/modules/home/widgets/pilih_kota.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({super.key});
@@ -46,7 +47,9 @@ class HomePage extends GetView<HomeController> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.to(() => PilihKota(tipe: 'asal'));
+                            },
                             style: ElevatedButton.styleFrom(
                               primary: Colors.white,
                               shape: RoundedRectangleBorder(
@@ -71,7 +74,9 @@ class HomePage extends GetView<HomeController> {
                             height: 20.0,
                           ),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.to(() => PilihKota(tipe: 'tujuan'));
+                            },
                             style: ElevatedButton.styleFrom(
                               primary: Colors.white,
                               shape: RoundedRectangleBorder(
@@ -100,9 +105,6 @@ class HomePage extends GetView<HomeController> {
               ),
             ),
           ),
-          Obx(() => controller.cities.isNotEmpty
-              ? Text(controller.cities[0]['city_name'])
-              : Text('blank'))
         ],
       ),
     ));
