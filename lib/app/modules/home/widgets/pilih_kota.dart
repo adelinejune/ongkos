@@ -131,6 +131,19 @@ class PilihKota extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
+                                onTap: () {
+                                  final cityId =
+                                      homeCtrl.filteredCities[index]['city_id'];
+                                  final cityName =
+                                      '${homeCtrl.filteredCities[index]['type']} ${homeCtrl.filteredCities[index]['city_name']}';
+                                  tipe == 'asal'
+                                      ? homeCtrl.assignKotaAsal(
+                                          cityId, cityName)
+                                      : homeCtrl.assignKotaTujuan(
+                                          cityId, cityName);
+                                  homeCtrl.searchController.clear();
+                                  Get.back();
+                                },
                               ),
                               Divider(height: 1, thickness: 1)
                             ],
