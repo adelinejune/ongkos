@@ -18,5 +18,9 @@ class Themes {
     canvasColor: backgroundNav,
     primaryColor: purpleAccent,
     primaryColorDark: darkGrey,
+    textTheme: const TextTheme(
+      titleMedium: TextStyle(
+          fontSize: 16.0, fontWeight: FontWeight.w500, color: Colors.white),
+    ),
   );
 }
