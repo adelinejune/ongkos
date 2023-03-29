@@ -13,9 +13,10 @@ class HomeController extends GetxController {
   RxList filteredCities = [].obs;
 
   TextEditingController searchController = TextEditingController();
+  TextEditingController beratController = TextEditingController();
 
-  var kotaAsalId = 0.obs;
-  var kotaTujuanId = 0.obs;
+  var kotaAsalId = "0".obs;
+  var kotaTujuanId = "0".obs;
   var kotaAsal = "".obs;
   var kotaTujuan = "".obs;
 
@@ -36,6 +37,14 @@ class HomeController extends GetxController {
     }
   }
 
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    searchController.dispose();
+    beratController.dispose();
+    super.onClose();
+  }
+
   void filterCities(String query) {
     if (query.isEmpty) {
       filteredCities.assignAll(cities);
@@ -43,5 +52,26 @@ class HomeController extends GetxController {
       filteredCities.assignAll(cities.where((city) =>
           city['city_name'].toLowerCase().contains(query.toLowerCase())));
     }
+  }
+
+  void assignKotaAsal(String id, String cityName) {
+    kotaAsalId.value = id;
+    kotaAsal.value = cityName;
+    filteredCities.assignAll(cities);
+  }
+
+  void assignKotaTujuan(String id, String cityName) {
+    kotaTujuanId.value = id;
+    kotaTujuan.value = cityName;
+    filteredCities.assignAll(cities);
+  }
+
+  void assignBerat(String value) {
+    berat = double.tryParse(value)!;
+    berat = berat * 1000;
+
+    print(kotaAsal);
+    print(kotaTujuan);
+    print("$berat gram");
   }
 }
