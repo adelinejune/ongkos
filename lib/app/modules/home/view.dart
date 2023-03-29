@@ -58,13 +58,23 @@ class HomePage extends GetView<HomeController> {
                               ),
                             ),
                             child: Row(
-                              children: const [
+                              children: [
                                 Padding(
                                   padding: EdgeInsets.only(left: 0),
-                                  child: Text(
-                                    'Kota Asal',
-                                    style: TextStyle(
-                                        color: Colors.black45, fontSize: 13),
+                                  child: Obx(
+                                    () => controller.kotaAsal.value.isEmpty
+                                        ? Text(
+                                            'Kota Asal',
+                                            style: TextStyle(
+                                                color: Colors.black45,
+                                                fontSize: 14),
+                                          )
+                                        : Text(
+                                            controller.kotaAsal.value,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15),
+                                          ),
                                   ),
                                 ),
                               ],
@@ -85,13 +95,23 @@ class HomePage extends GetView<HomeController> {
                               ),
                             ),
                             child: Row(
-                              children: const [
+                              children: [
                                 Padding(
                                   padding: EdgeInsets.only(left: 0),
-                                  child: Text(
-                                    'Kota Tujuan',
-                                    style: TextStyle(
-                                        color: Colors.black45, fontSize: 13),
+                                  child: Obx(
+                                    () => controller.kotaTujuan.value.isEmpty
+                                        ? Text(
+                                            'Kota Tujuan',
+                                            style: TextStyle(
+                                                color: Colors.black45,
+                                                fontSize: 14),
+                                          )
+                                        : Text(
+                                            controller.kotaTujuan.value,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15),
+                                          ),
                                   ),
                                 ),
                               ],
@@ -105,6 +125,75 @@ class HomePage extends GetView<HomeController> {
               ),
             ),
           ),
+          Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: 5.0.wp, vertical: 2.0.wp),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Berat Paket',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  SizedBox(
+                    height: 12.0,
+                  ),
+                  Container(
+                    height: 40,
+                    child: TextField(
+                      autocorrect: false,
+                      autofocus: false,
+                      controller: controller.beratController,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Work Sans',
+                        fontWeight: FontWeight.w500,
+                      ),
+                      keyboardType:
+                          TextInputType.numberWithOptions(decimal: true),
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10.0,
+                          horizontal: 10.0,
+                        ),
+                        suffixIcon: Container(
+                          width: 30,
+                          child: Center(
+                            child: Text(
+                              'kg',
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontFamily: 'Work Sans',
+                                  fontSize: 15),
+                            ),
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade300,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade300,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade300,
+                          ),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                      ),
+                      onChanged: (value) => controller.assignBerat(value),
+                    ),
+                  )
+                ],
+              ))
         ],
       ),
     ));
