@@ -11,10 +11,8 @@ class NavigationBinding extends Bindings {
     Get.lazyPut<NavigationController>(
       () => NavigationController(),
     );
-    Get.lazyPut<HomeController>(
-      () => HomeController(
-          cityRepository: CityRepository(cityProvider: CityProvider())),
-    );
+    Get.put(HomeController(
+        cityRepository: CityRepository(cityProvider: CityProvider())));
     Get.lazyPut<ResiController>(
       () => ResiController(),
     );
