@@ -10,7 +10,7 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    var squareWidth = Get.width - 15.0.wp;
+    var squareWidth = Get.width - 18.0.wp;
 
     return Scaffold(
       body: SafeArea(
@@ -205,7 +205,7 @@ class HomePage extends GetView<HomeController> {
             //Pemilihan Kurir
             Padding(
               padding: EdgeInsets.only(
-                  left: 5.0.wp, right: 5.0.wp, top: 4.0.wp, bottom: 2.0.wp),
+                  left: 5.0.wp, right: 5.0.wp, top: 4.0.wp, bottom: 4.0.wp),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -214,44 +214,50 @@ class HomePage extends GetView<HomeController> {
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(
-                    height: 12.0,
+                    height: 6.0,
                   ),
                   Wrap(
-                    spacing: 2.0.wp,
+                    spacing: 4.0.wp,
                     children: controller.kurir
                         .map((e) => Obx(() {
-                              return SizedBox(
-                                width: squareWidth / 3,
-                                child: ChoiceChip(
-                                  label: Container(
-                                    width: squareWidth / 3,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage(e['image']!),
-                                        fit: BoxFit.contain,
+                              return Padding(
+                                padding: EdgeInsets.symmetric(vertical: 3.5),
+                                child: SizedBox(
+                                  width: squareWidth / 3,
+                                  child: ChoiceChip(
+                                    label: Container(
+                                      width: squareWidth / 3,
+                                      height: 30,
+                                      padding: EdgeInsets.all(3.5),
+                                      child: SizedBox(
+                                        child: Image(
+                                          image: AssetImage(e['image']!),
+                                          fit: BoxFit.scaleDown,
+                                        ),
                                       ),
                                     ),
+                                    selected: controller.selectedKurir
+                                        .contains(e['code']),
+                                    backgroundColor: Colors.white,
+                                    selectedColor: Colors.grey.shade300,
+                                    pressElevation: 0,
+                                    onSelected: (selected) {
+                                      if (selected) {
+                                        controller.selectedKurir.add(e['code']);
+                                      } else {
+                                        controller.selectedKurir
+                                            .remove(e['code']);
+                                      }
+                                      print(controller.selectedKurir);
+                                    },
+                                    shape: ContinuousRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      side: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 0.5),
+                                    ),
+                                    //
                                   ),
-                                  selected: controller.selectedKurir
-                                      .contains(e['code']),
-                                  backgroundColor: Colors.white,
-                                  selectedColor: Colors.grey.shade300,
-                                  pressElevation: 0,
-                                  onSelected: (selected) {
-                                    if (selected) {
-                                      controller.selectedKurir.add(e['code']);
-                                    } else {
-                                      controller.selectedKurir
-                                          .remove(e['code']);
-                                    }
-                                    print(controller.selectedKurir);
-                                  },
-                                  shape: ContinuousRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    side: BorderSide(
-                                        color: Colors.transparent, width: 0.5),
-                                  ),
-                                  //
                                 ),
                               );
                             }))
@@ -260,6 +266,43 @@ class HomePage extends GetView<HomeController> {
                 ],
               ),
             ),
+
+            Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: 5.0.wp, vertical: 4.0.wp),
+              child: SizedBox(
+                height: 45,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Kalkulasi Ongkir',
+                        style: TextStyle(
+                          fontFamily: 'Work Sans',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 19.0,
+                          letterSpacing: 0.8,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: Image.asset(
+                          'assets/images/box.png',
+                        ),
+                      ),
+                    ],
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).primaryColor),
+                ),
+              ),
+            )
           ],
         ),
       ),
