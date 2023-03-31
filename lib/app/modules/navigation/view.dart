@@ -24,7 +24,7 @@ class NavigationPage extends StatelessWidget {
             unselectedItemColor: Colors.white,
             unselectedFontSize: 9.0.sp,
             selectedFontSize: 9.0.sp,
-            selectedItemColor: Theme.of(context).primaryColor,
+            selectedItemColor: Theme.of(context).primaryColorLight,
             currentIndex: controller.tabIndex,
             onTap: controller.changeTabIndex,
             type: BottomNavigationBarType.fixed,
