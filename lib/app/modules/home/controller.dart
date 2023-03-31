@@ -20,9 +20,21 @@ class HomeController extends GetxController {
   var kotaAsal = "".obs;
   var kotaTujuan = "".obs;
 
-  var kurir = "".obs;
-
   double berat = 0.0;
+
+  var kurir = [
+    {"image": "assets/kurir/jne.png", "code": "jne"},
+    {"image": "assets/kurir/jnt.png", "code": "jnt"},
+    {"image": "assets/kurir/sicepat.png", "code": "sicepat"},
+    {"image": "assets/kurir/pos.png", "code": "pos"},
+    {"image": "assets/kurir/lion.png", "code": "lion"},
+    {"image": "assets/kurir/anteraja.png", "code": "anteraja"},
+    {"image": "assets/kurir/tiki.png", "code": "tiki"},
+    {"image": "assets/kurir/ninja.png", "code": "ninja"},
+    {"image": "assets/kurir/idexpress.png", "code": "ide"}
+  ];
+
+  var selectedKurir = [].obs;
 
   @override
   void onInit() async {
@@ -42,6 +54,7 @@ class HomeController extends GetxController {
     // TODO: implement onClose
     searchController.dispose();
     beratController.dispose();
+    selectedKurir.clear();
     super.onClose();
   }
 
