@@ -6,6 +6,7 @@ class Themes {
     scaffoldBackgroundColor: Colors.white,
     primaryColor: primaryBlue,
     primaryColorDark: backgroundNav,
+    primaryColorLight: blueAccent,
     canvasColor: backgroundNav,
     textTheme: const TextTheme(
       titleMedium: TextStyle(
@@ -16,7 +17,8 @@ class Themes {
   final darkTheme = ThemeData.dark().copyWith(
     scaffoldBackgroundColor: grey,
     canvasColor: backgroundNav,
-    primaryColor: purpleAccent,
+    primaryColor: primaryPurple,
+    primaryColorLight: purpleAccent,
     primaryColorDark: darkGrey,
     textTheme: const TextTheme(
       titleMedium: TextStyle(
