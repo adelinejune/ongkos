@@ -273,7 +273,9 @@ class HomePage extends GetView<HomeController> {
               child: SizedBox(
                 height: 45,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.ongkosKirim();
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
