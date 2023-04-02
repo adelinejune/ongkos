@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:ongkos/app/data/models/city.dart';
 import 'package:ongkos/app/data/services/repository.dart';
+import 'package:ongkos/app/modules/ongkir%20result/view.dart';
 
 class HomeController extends GetxController {
   CityRepository cityRepository;
@@ -19,6 +23,8 @@ class HomeController extends GetxController {
   var kotaTujuanId = "0".obs;
   var kotaAsal = "".obs;
   var kotaTujuan = "".obs;
+  var provinceAsal = "".obs;
+  var provinceTujuan = "".obs;
 
   double berat = 0.0;
 
@@ -67,15 +73,18 @@ class HomeController extends GetxController {
     }
   }
 
-  void assignKotaAsal(String id, String cityName) {
+  void assignKotaAsal(String id, String cityName, String province) {
     kotaAsalId.value = id;
     kotaAsal.value = cityName;
+    provinceAsal.value = province;
+
     filteredCities.assignAll(cities);
   }
 
-  void assignKotaTujuan(String id, String cityName) {
+  void assignKotaTujuan(String id, String cityName, String province) {
     kotaTujuanId.value = id;
     kotaTujuan.value = cityName;
+    provinceTujuan.value = province;
     filteredCities.assignAll(cities);
   }
 
@@ -86,5 +95,61 @@ class HomeController extends GetxController {
     print(kotaAsal);
     print(kotaTujuan);
     print("$berat gram");
+  }
+
+  void checkForm() {
+    print(kotaAsalId != 0);
+    print(kotaTujuanId != 0);
+    print(berat > 0);
+    print(selectedKurir.isNotEmpty);
+  }
+
+  void ongkosKirim() async {
+    Uri url = Uri.parse('https://pro.rajaongkir.com/api/cost');
+
+    if (kotaAsalId != 0 &&
+        kotaTujuanId != 0 &&
+        berat > 0 &&
+        selectedKurir.isNotEmpty) {
+      var kurirBody = "";
+      if (selectedKurir.length > 1) {
+        for (var i = 0; i < selectedKurir.length; i++) {
+          if (i == selectedKurir.length - 1) {
+            kurirBody += "${selectedKurir[i]}";
+          } else {
+            kurirBody += "${selectedKurir[i]}:";
+          }
+        }
+      } else {
+        kurirBody = selectedKurir[0];
+      }
+
+      try {
+        final response = await http.post(url, body: {
+          "origin": "$kotaAsalId",
+          "originType": "city",
+          "destination": "$kotaTujuanId",
+          "destinationType": "city",
+          "weight": "$berat",
+          "courier": "$kurirBody",
+        }, headers: {
+          "key": dotenv.get('API_KEY', fallback: ""),
+          "content-type": "application/x-www-form-urlencoded"
+        });
+
+        var data = json.decode(response.body) as Map<String, dynamic>;
+        var result = data["rajaongkir"]["results"] as List<dynamic>;
+
+        Get.to(() => OngkirResult(result: result));
+
+        print(result);
+      } catch (err) {
+        print(err);
+        Get.defaultDialog(
+          title: 'Terjadi kesalahan',
+          middleText: err.toString(),
+        );
+      }
+    } else {}
   }
 }
