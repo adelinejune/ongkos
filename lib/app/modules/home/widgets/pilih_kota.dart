@@ -136,11 +136,14 @@ class PilihKota extends StatelessWidget {
                                       homeCtrl.filteredCities[index]['city_id'];
                                   final cityName =
                                       '${homeCtrl.filteredCities[index]['type']} ${homeCtrl.filteredCities[index]['city_name']}';
+                                  final province = homeCtrl
+                                      .filteredCities[index]['province'];
+
                                   tipe == 'asal'
                                       ? homeCtrl.assignKotaAsal(
-                                          cityId, cityName)
+                                          cityId, cityName, province)
                                       : homeCtrl.assignKotaTujuan(
-                                          cityId, cityName);
+                                          cityId, cityName, province);
                                   homeCtrl.searchController.clear();
                                   Get.back();
                                 },
