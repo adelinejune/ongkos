@@ -30,7 +30,7 @@ class HomeController extends GetxController {
 
   var kurir = [
     {"image": "assets/kurir/jne.png", "code": "jne"},
-    {"image": "assets/kurir/jnt.png", "code": "jnt"},
+    {"image": "assets/kurir/j&t.png", "code": "jnt"},
     {"image": "assets/kurir/sicepat.png", "code": "sicepat"},
     {"image": "assets/kurir/pos.png", "code": "pos"},
     {"image": "assets/kurir/lion.png", "code": "lion"},
@@ -41,6 +41,8 @@ class HomeController extends GetxController {
   ];
 
   var selectedKurir = [].obs;
+
+  var isLoading = false.obs;
 
   @override
   void onInit() async {
@@ -91,17 +93,6 @@ class HomeController extends GetxController {
   void assignBerat(String value) {
     berat = double.tryParse(value)!;
     berat = berat * 1000;
-
-    print(kotaAsal);
-    print(kotaTujuan);
-    print("$berat gram");
-  }
-
-  void checkForm() {
-    print(kotaAsalId != 0);
-    print(kotaTujuanId != 0);
-    print(berat > 0);
-    print(selectedKurir.isNotEmpty);
   }
 
   void ongkosKirim() async {
@@ -125,6 +116,8 @@ class HomeController extends GetxController {
       }
 
       try {
+        isLoading.value = true;
+
         final response = await http.post(url, body: {
           "origin": "$kotaAsalId",
           "originType": "city",
@@ -149,7 +142,27 @@ class HomeController extends GetxController {
           title: 'Terjadi kesalahan',
           middleText: err.toString(),
         );
+      } finally {
+        isLoading.value = false;
       }
-    } else {}
+    } else {
+      Get.defaultDialog(
+        title: 'Terjadi kesalahan',
+        middleText: 'belum diisi lengkap',
+      );
+    }
+  }
+
+  void clear() {
+    kotaAsalId.value = "0";
+    kotaTujuanId.value = "0";
+    kotaAsal.value = "";
+    kotaTujuan.value = "";
+    provinceAsal.value = "";
+    provinceTujuan.value = "";
+    berat = 0;
+    searchController.clear();
+    beratController.clear();
+    selectedKurir.clear();
   }
 }

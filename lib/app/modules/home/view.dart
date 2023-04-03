@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:ongkos/app/core/utils/extension.dart';
@@ -276,30 +277,41 @@ class HomePage extends GetView<HomeController> {
                   onPressed: () {
                     controller.ongkosKirim();
                   },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Kalkulasi Ongkir',
-                        style: TextStyle(
-                          fontFamily: 'Work Sans',
-                          fontWeight: FontWeight.w600,
-                          fontSize: 19.0,
-                          letterSpacing: 0.8,
+                  child: Obx(() {
+                    if (controller.isLoading.value) {
+                      return Center(
+                        child: SpinKitThreeInOut(
+                          color: Colors.white,
+                          size: 20,
                         ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: Image.asset(
-                          'assets/images/box.png',
-                        ),
-                      ),
-                    ],
-                  ),
+                      );
+                    } else {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Kalkulasi Ongkir',
+                            style: TextStyle(
+                              fontFamily: 'Work Sans',
+                              fontWeight: FontWeight.w600,
+                              fontSize: 19.0,
+                              letterSpacing: 0.8,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: Image.asset(
+                              'assets/images/box.png',
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                  }),
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).primaryColor),
                 ),
