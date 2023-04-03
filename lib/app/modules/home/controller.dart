@@ -137,18 +137,82 @@ class HomeController extends GetxController {
 
         print(result);
       } catch (err) {
-        print(err);
-        Get.defaultDialog(
-          title: 'Terjadi kesalahan',
-          middleText: err.toString(),
+        Get.dialog(
+          AlertDialog(
+            backgroundColor: Colors.white,
+            title: const Text(
+              "Terjadi kesalahan",
+              style: TextStyle(
+                fontFamily: 'Work Sans',
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
+            ),
+            content: const Text(
+              'Terjadi kesalahan pada server',
+              style: TextStyle(
+                fontFamily: 'Work Sans',
+                fontSize: 14,
+                color: Colors.black,
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Get.back(),
+                child: const Text(
+                  "Baik",
+                  style: TextStyle(color: Colors.indigo),
+                ),
+              ),
+            ],
+          ),
         );
       } finally {
         isLoading.value = false;
       }
     } else {
-      Get.defaultDialog(
-        title: 'Terjadi kesalahan',
-        middleText: 'belum diisi lengkap',
+      var errorText = '';
+      if (kotaAsalId == "0") {
+        errorText = 'Mohon isi kota asal';
+      } else if (kotaTujuanId == "0") {
+        errorText = 'Mohon mengisi kota tujuan';
+      } else if (berat <= 0) {
+        errorText = 'Input berat tidak valid';
+      } else if (selectedKurir.isEmpty) {
+        errorText = 'Mohon pilih kurir yang ingin digunakan';
+      }
+
+      Get.dialog(
+        AlertDialog(
+          backgroundColor: Colors.white,
+          title: const Text(
+            "Form Belum Terisi Lengkap",
+            style: TextStyle(
+              fontFamily: 'Work Sans',
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+            ),
+          ),
+          content: Text(
+            errorText,
+            style: const TextStyle(
+              fontFamily: 'Work Sans',
+              fontSize: 14,
+              color: Colors.black,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Get.back(),
+              child: const Text(
+                "Baik",
+                style: TextStyle(color: Colors.indigo),
+              ),
+            ),
+          ],
+        ),
       );
     }
   }
