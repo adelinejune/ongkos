@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ongkos">
+    package="com.adelinejune.ongkos">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="ongkos"
         android:name="${applicationName}"
