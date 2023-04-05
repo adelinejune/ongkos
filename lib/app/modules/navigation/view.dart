@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ongkos/app/core/utils/extension.dart';
 import 'package:ongkos/app/modules/home/view.dart';
-import 'package:ongkos/app/modules/resi/view.dart';
+// import 'package:ongkos/app/modules/resi/view.dart';
 import 'package:ongkos/app/modules/setting/view.dart';
 
 import './controller.dart';
@@ -18,7 +18,7 @@ class NavigationPage extends StatelessWidget {
         body: SafeArea(
             child: IndexedStack(
           index: controller.tabIndex,
-          children: [HomePage(), CekResiPage(), SettingPage()],
+          children: [HomePage(), SettingPage()],
         )),
         bottomNavigationBar: BottomNavigationBar(
             unselectedItemColor: Colors.white,
@@ -36,13 +36,13 @@ class NavigationPage extends StatelessWidget {
                 ),
                 label: 'Cek Ongkir',
               ),
-              BottomNavigationBarItem(
-                icon: Padding(
-                  padding: EdgeInsets.only(bottom: 2.0.wp, top: 1.5.hp),
-                  child: FaIcon(FontAwesomeIcons.truck),
-                ),
-                label: 'Cek Resi',
-              ),
+              // BottomNavigationBarItem(
+              //   icon: Padding(
+              //     padding: EdgeInsets.only(bottom: 2.0.wp, top: 1.5.hp),
+              //     child: FaIcon(FontAwesomeIcons.truck),
+              //   ),
+              //   label: 'Cek Resi',
+              // ),
               BottomNavigationBarItem(
                 icon: Padding(
                   padding: EdgeInsets.only(bottom: 2.0.wp, top: 1.5.hp),
