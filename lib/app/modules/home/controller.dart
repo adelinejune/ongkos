@@ -91,6 +91,7 @@ class HomeController extends GetxController {
   }
 
   void assignBerat(String value) {
+    value = value.replaceAll(',', '.');
     berat = double.tryParse(value)!;
     berat = berat * 1000;
   }
